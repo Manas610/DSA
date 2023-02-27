@@ -14,7 +14,7 @@ int partition(int *arr , int s , int e){
 
     int i = s, j = e;
     while(i<pivotIndex && j>pivotIndex){
-        while(arr[i]<=pivot){
+        while(arr[i]<pivot){
             i++;
         }
         while(arr[j]>pivot){
@@ -24,6 +24,7 @@ int partition(int *arr , int s , int e){
             swap(arr[i++],arr[j--]);
         }
     }
+    return pivotIndex;
 }
 
 void quickSort(int *arr , int s , int e){
@@ -39,8 +40,8 @@ void quickSort(int *arr , int s , int e){
 }
 
 int main(){
-    int arr[8] ={6, 7 , -6, -2, -4, -6, 2, -6 };
-    int n = 8;
+    int arr[19] ={1 ,1 ,1 ,1 ,2 ,2 ,2 ,2 ,4 ,4 ,2 ,2 ,2 ,4 ,4 ,4 ,4 ,4 ,4};
+    int n = 19;
     quickSort(arr , 0 , n-1);
 
     for(int i=0;i<n;i++){
