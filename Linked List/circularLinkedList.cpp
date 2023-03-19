@@ -104,12 +104,12 @@ bool detectNode (Node* head) {
 
 }
 
-bool floydLoopDetection (Node* head){
+Node* floydLoopDetection (Node* head){
     Node* slow = head;
     Node* fast = head;
 
     if(head == NULL){
-        return 0;
+        return NULL;
     }
 
     while (slow != NULL && fast != NULL){
@@ -119,10 +119,46 @@ bool floydLoopDetection (Node* head){
                 fast = fast -> next;
             }
         if(slow == fast){
-            return 1;
+            return slow;
         }
     }
-    return 0;
+    return NULL;
+}
+
+Node* getStartingNode(Node* head){
+    if(head == NULL){
+        return NULL;
+    }
+    Node* intersection = floydLoopDetection(head);
+    if (intersection == NULL){
+        return NULL;
+    }
+    Node* slow = head;
+
+    while(intersection != slow){
+        slow = slow -> next;
+        intersection = intersection -> next;
+    }
+
+    return slow;
+}
+
+Node* removeCycle(Node* head){
+    if(head == NULL){
+        return NULL;
+    }
+    Node* startingOfLoop = getStartingNode(head);
+    if(startingOfLoop = NULL){
+        return NULL;
+    }
+    Node* temp = startingOfLoop;
+
+    while(temp -> next != startingOfLoop){
+        temp = temp -> next;
+    }
+
+    temp -> next = NULL;
+    return head;
 }
 
 int main(){
@@ -140,6 +176,6 @@ int main(){
     deleteNode(tail ,12);
     print(tail);
 
-    cout << floydLoopDetection(tail);
+    floydLoopDetection(tail);
 
 }
