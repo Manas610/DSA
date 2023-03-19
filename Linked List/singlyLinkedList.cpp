@@ -1,4 +1,5 @@
 #include<iostream>
+#include<map>
 using namespace std;
 
 class Node{
@@ -94,6 +95,28 @@ void deleteNode(int position,Node* &head,Node* &tail){
     }
 }
 
+bool detectNode (Node* head) {
+    if (head == NULL){
+        return false;
+    }
+
+    map <Node* , bool> visited;
+
+    Node* temp = head;
+
+    while (temp != NULL){
+        if (visited[temp] == true){
+            return true;
+        }
+
+        visited[temp] = true;
+        temp = temp -> next;
+    }
+
+    return false;
+
+}
+
 int main(){
     Node* node1 = new Node(25);
     // cout << node1 -> data << endl;
@@ -111,6 +134,8 @@ int main(){
 
     insertAtTail(tail , 35);
     print(head);
+
+    cout << detectNode(head) << endl;
 
     insertAtPosition(head, tail , 2 , 20);
     print(head);
