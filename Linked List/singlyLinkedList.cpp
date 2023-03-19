@@ -117,6 +117,27 @@ bool detectNode (Node* head) {
 
 }
 
+bool floydLoopDetection (Node* head){
+    Node* slow = head;
+    Node* fast = head;
+
+    if(head == NULL){
+        return 0;
+    }
+
+    while (slow != NULL && fast != NULL){
+        slow = slow -> next;
+        fast = fast -> next;
+            if(fast != NULL){
+                fast = fast -> next;
+            }
+        if(slow == fast){
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int main(){
     Node* node1 = new Node(25);
     // cout << node1 -> data << endl;
@@ -124,27 +145,27 @@ int main(){
 
     Node* head = node1;
     Node* tail = node1;
-    print(head);
+    //print(head);
 
     insertAtHead(head , 10);
-    print(head);
+    //print(head);
 
     insertAtHead(head , 15);
-    print(head);
+    //print(head);
 
     insertAtTail(tail , 35);
-    print(head);
+    //print(head);
 
-    cout << detectNode(head) << endl;
+    cout << floydLoopDetection(head) << endl;
 
-    insertAtPosition(head, tail , 2 , 20);
-    print(head);
+    // insertAtPosition(head, tail , 2 , 20);
+    // print(head);
 
-    insertAtPosition(head, tail , 6 , 40);
-    print(head);
+    // insertAtPosition(head, tail , 6 , 40);
+    // print(head);
 
-    deleteNode(6, head,tail);
-    print(head);
+    // deleteNode(6, head,tail);
+    // print(head);
 
     cout << "Head -> "<< head -> data << endl;
     cout << "Tail -> "<< tail -> data << endl;

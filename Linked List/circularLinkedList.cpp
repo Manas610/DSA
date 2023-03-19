@@ -17,7 +17,7 @@ class Node{
             delete next;
             this -> next = NULL;
         }
-        cout << "The Value Deleted is " << value << endl;
+        //cout << "The Value Deleted is " << value << endl;
     }
 };
 
@@ -104,6 +104,27 @@ bool detectNode (Node* head) {
 
 }
 
+bool floydLoopDetection (Node* head){
+    Node* slow = head;
+    Node* fast = head;
+
+    if(head == NULL){
+        return 0;
+    }
+
+    while (slow != NULL && fast != NULL){
+        slow = slow -> next;
+        fast = fast -> next;
+            if(fast != NULL){
+                fast = fast -> next;
+            }
+        if(slow == fast){
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int main(){
 
     Node* tail = NULL;
@@ -119,6 +140,6 @@ int main(){
     deleteNode(tail ,12);
     print(tail);
 
-    cout << detectNode(tail);
+    cout << floydLoopDetection(tail);
 
 }
